@@ -1,0 +1,9 @@
+name: ngff_env
+channels:
+  - defaults
+  - conda-forge
+  - ome
+dependencies:
+  - ome::bioformats2raw
+  - awscli
+
