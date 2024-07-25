@@ -34,11 +34,7 @@ echo "endpoint_url = https://uk1s3.embassy.ebi.ac.uk" >> ~/.aws/config
 
 ## Run
 
-Create the work directory for NextFlow and adjust path in https://github.com/dominikl/nf_ngff_conv/blob/main/nextflow.config#L2
-
-Create the directory where (links to) the generated zarrs will be stored (temporarily) and adjust path in https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L1 
-
-Then run (just an example!):
+Just an example using specific nextflow work directory `/data/dlindner/nextflow` and the [sample_filepaths.tsv](https://raw.githubusercontent.com/dominikl/nf_ngff_conv/main/sample_filepaths.tsv) (taken from IDR0154) with previously set up `embassy` AWS profile:
 ```
 ./nextflow run -work-dir "/data/dlindner/nextflow" --input "https://raw.githubusercontent.com/dominikl/nf_ngff_conv/main/sample_filepaths.tsv" --column 1 --awsProfile "embassy" --bucket "dlindner" ngff_workflow.nf
 ```
