@@ -1,6 +1,6 @@
 process convert {
   conda 'ngff_env.yml'
-  publishDir params.zarrsDir
+  publishDir '/tmp/zarrs'
 
   maxForks params.maxConvJobs
   disk params.maxConvJobDisk
@@ -25,7 +25,7 @@ process upload {
 
   script:
   """
-  aws --profile uk1s3 s3 sync ${zarr} s3://${params.bucket}/${zarr}
+  aws --profile ${params.awsProfile} s3 sync ${zarr} s3://${params.bucket}/${zarr}
   """
 }
 
@@ -35,9 +35,9 @@ process remove {
 
   script:
   """
-  fullpath=`readlink -z ${params.zarrsDir}/${to_remove}`
+  fullpath=`readlink -z /tmp/zarrs/${to_remove}`
   rm -rf \"\$fullpath\"
-  rm ${params.zarrsDir}/${to_remove}
+  rm /tmp/zarrs//${to_remove}
   """
 }
 
