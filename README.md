@@ -49,4 +49,6 @@ Then run:
 -- bucket [name of the s3 bucket to upload to]
 ```
 
-Note: If you want to keep the zarrs locally then just comment out the remove() step https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L52 .
+Note: If you want to keep the zarrs locally then just comment out the remove() step https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L56 .
+
+Depending on the expected image file size, adjust the resource limits https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L9 .
