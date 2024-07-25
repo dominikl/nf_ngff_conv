@@ -2,8 +2,12 @@ params.zarrsDir = '/data/dlindner/nextflow/zarrs_tmp'
 
 process convert {
   conda 'ngff_env.yml'
-
   publishDir params.zarrsDir
+
+  // adjust this to prevent running out of diskspace (5 TB)
+  // this example would be suitable for ~1 TB plates
+  maxForks 2
+  disk '1500 GB'
 
   input:
   path imgfile
