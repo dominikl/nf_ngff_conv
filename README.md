@@ -44,11 +44,13 @@ Then run:
 ```
 
 ```
--- input [filpaths.tsv from IDR]
--- column [which column has the image paths, zero based]
--- bucket [name of the s3 bucket to upload to]
+--input [filpaths.tsv from IDR]
+--column [which column has the image paths, zero based]
+--bucket [name of the s3 bucket to upload to]
+
+Optional parameters:
+--removeZarrs [true|false] Remove generated zarrs after upload (default: true)
+--maxConvJobs [number of conversion jobs that can run at the same time] (default: 2)
+--maxConvJobDisk [number of disk space a conversion job can use] (default: 1500 GB) 
 ```
 
-Note: If you want to keep the zarrs locally then just comment out the remove() step https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L56 .
-
-Depending on the expected image file size, adjust the resource limits https://github.com/dominikl/nf_ngff_conv/blob/main/ngff_workflow.nf#L9 .

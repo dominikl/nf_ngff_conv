@@ -1,5 +1,3 @@
-params.zarrsDir = '/data/dlindner/nextflow/zarrs_tmp'
-
 process convert {
   conda 'ngff_env.yml'
   publishDir params.zarrsDir
@@ -51,5 +49,7 @@ workflow {
 
     convert(image_paths)
     upload(convert.out)
-    remove(upload.out)
+    if ( params.removeZarrs ) {
+      remove(upload.out)
+    }
 }
