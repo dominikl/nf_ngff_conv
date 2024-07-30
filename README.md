@@ -61,6 +61,6 @@ nextflow run --input "https://raw.githubusercontent.com/dominikl/nf_ngff_conv/ma
 
 ```
 --input [filpaths.tsv from IDR]
---column [which column has the image paths, zero based]
+--column [the column which holds the image paths, zero based]
 ```
 (Note: The generated zarrs are sym-linked into /tmp/zarrs/, if they're not deleted of course)

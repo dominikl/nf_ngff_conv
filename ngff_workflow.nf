@@ -1,6 +1,6 @@
 process convert {
   conda 'ngff_env.yml'
-  publishDir '/tmp/zarrs'
+  publishDir params.pubDir
 
   maxForks params.maxConvJobs
   disk params.maxConvJobDisk
@@ -34,10 +34,11 @@ process remove {
   path to_remove
 
   script:
+  def pubdir = "${params.pubDir}"
   """
-  fullpath=`readlink -z /tmp/zarrs/${to_remove}`
+  fullpath=`readlink -z \$pubdir/${to_remove}`
   rm -rf \"\$fullpath\"
-  rm /tmp/zarrs//${to_remove}
+  rm \$pubdir/${to_remove}
   """
 }
 
