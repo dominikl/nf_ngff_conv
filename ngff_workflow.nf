@@ -36,9 +36,9 @@ process remove {
   script:
   def pubdir = "${params.pubDir}"
   """
-  fullpath=`readlink -z \$pubdir/${to_remove}`
+  fullpath=`readlink -z \"${pubdir}\"/${to_remove}`
   rm -rf \"\$fullpath\"
-  rm \$pubdir/${to_remove}
+  rm \"${pubdir}\"/${to_remove}
   """
 }
 
