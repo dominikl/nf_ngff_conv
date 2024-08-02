@@ -7,15 +7,15 @@ process convert {
   disk params.maxConvJobDisk
 
   input:
-  path imgfile
+  tuple val(dataset), path(imgfile)
 
   output:
-  path "${imgfile.baseName}.zarr"
-
+  tuple (path(dataset), path("${dataset}/${imgfile.baseName}.zarr"))
   script:
-  def outfile = "${imgfile.baseName}.zarr"
+  def outfile = "${dataset}/${imgfile.baseName}.zarr"
   """
-  bioformats2raw ${imgfile}  \"${outfile}\"
+  mkdir \"${dataset}\"
+  bioformats2raw --memo-directory /tmp ${imgfile}  \"${outfile}\"
   """
 }
 
@@ -23,14 +23,14 @@ process upload {
   conda 'bf2raw_env.yml'
 
   input:
-  path zarr
+  tuple path(dataset), path(img)
 
   output:
-  path zarr
+  path img
 
   script:
   """
-  aws --profile ${params.awsProfile} s3 sync ${zarr} s3://${params.bucket}/${zarr}
+  aws --profile ${params.awsProfile} s3 sync ${img} s3://${params.bucket}/${dataset}/${img}
   """
 }
 
@@ -51,7 +51,7 @@ workflow {
     image_paths = Channel
     .fromPath(params.input)
     .splitCsv(header:false, sep:"\t")
-    .map { file(it[params.column]) }
+    .map { tuple( it[0].replaceAll('Dataset:name:',''), file(it[params.column]) ) }
 
     convert(image_paths)
 

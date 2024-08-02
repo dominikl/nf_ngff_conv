@@ -54,13 +54,5 @@ Adjust configuration in [nextflow.config](https://github.com/dominikl/nf_ngff_co
 
 ## Run
 
-Example using the [sample_filepaths.tsv](https://raw.githubusercontent.com/dominikl/nf_ngff_conv/main/sample_filepaths.tsv) (taken from IDR0154) with the previously set up `embassy` AWS profile:
-```
-nextflow run --input "https://raw.githubusercontent.com/dominikl/nf_ngff_conv/main/sample_filepaths.tsv" --column 1 ngff_workflow.nf
-```
-
-```
---input [filpaths.tsv from IDR]
---column [the column which holds the image paths, zero based]
-```
+TODO
 
