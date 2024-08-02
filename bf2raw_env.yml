@@ -1,4 +1,4 @@
-name: ngff_env
+name: bf2raw_env
 channels:
   - defaults
   - conda-forge

@@ -1,5 +1,6 @@
 process convert {
-  conda 'ngff_env.yml'
+  conda 'bf2raw_env.yml'
+
   publishDir params.pubDir
 
   maxForks params.maxConvJobs
@@ -7,6 +8,7 @@ process convert {
 
   input:
   path imgfile
+
   output:
   path "${imgfile.baseName}.zarr"
 
@@ -18,8 +20,11 @@ process convert {
 }
 
 process upload {
+  conda 'bf2raw_env.yml'
+
   input:
   path zarr
+
   output:
   path zarr
 
@@ -49,7 +54,9 @@ workflow {
     .map { file(it[params.column]) }
 
     convert(image_paths)
+
     upload(convert.out)
+
     if ( params.removeZarrs ) {
       remove(upload.out)
     }
