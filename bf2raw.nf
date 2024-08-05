@@ -41,8 +41,8 @@ process remove {
   script:
   def pubdir = "${params.pubDir}"
   """
-  fullpath=`readlink -z ${pubdir}/${dataset}/${img}`
-  rm -rf \"\$fullpath\"
+  dspath=`readlink -z ${pubdir}/${dataset}`
+  rm -rf \"\$dspath\"/${img}
   """
 }
 
