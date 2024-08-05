@@ -26,7 +26,7 @@ process upload {
   tuple path(dataset), path(img)
 
   output:
-  path img
+  tuple(path(dataset), path(img))
 
   script:
   """
@@ -36,14 +36,13 @@ process upload {
 
 process remove {
   input:
-  path to_remove
+  tuple path(dataset), path(img)
 
   script:
   def pubdir = "${params.pubDir}"
   """
-  fullpath=`readlink -z \"${pubdir}\"/${to_remove}`
+  fullpath=`readlink -z ${pubdir}/${dataset}/${img}`
   rm -rf \"\$fullpath\"
-  rm \"${pubdir}\"/${to_remove}
   """
 }
 

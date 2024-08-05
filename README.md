@@ -54,5 +54,16 @@ Adjust configuration in [nextflow.config](https://github.com/dominikl/nf_ngff_co
 
 ## Run
 
-TODO
+Run it with:
+
+```
+nextflow run --input idr0157_paths.tsv --column 1 bf2raw.nf
+```
+
+(Where `--column 1` means that the second column contains the paths the images. It is assumed that the first column is the dataset name)
+
+## Notes
+
+- `idr0157_paths.tsv` is an example and only contains the first dataset of idr0157.
+- `params.removeZarrs` is set to false, because the "remove" step doesn't work properly yet.
 
