@@ -50,6 +50,12 @@ aws configure --profile embassy
 echo "endpoint_url = https://uk1s3.embassy.ebi.ac.uk" >> ~/.aws/config 
 ```
 
+Check this is working:
+
+```
+aws s3 --profile embassy ls idr/zarr/v0.4/idr0157/
+```
+
 Adjust configuration in [nextflow.config](https://github.com/dominikl/nf_ngff_conv/blob/main/nextflow.config).
 
 ## Run
@@ -64,3 +70,9 @@ nextflow run --input idr0157_paths.tsv --column 1 bf2raw.nf
 
 Note: `idr0157_paths.tsv` is an example and only contains the first dataset of idr0157.
 
+
+Running `resave` conversion:
+
+```
+../nextflow run --input idr0054_images.tsv --column 1 --idrId idr0054 --modality "NCIT_C182027" --organism NCBI:txid9606 --name "idr0054" --shards "1,1,1,3072,3072" --chunks "1,1,1,1024,1024" resave.nf
+```

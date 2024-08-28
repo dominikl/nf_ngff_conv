@@ -1,0 +1,10 @@
+name: ngff-challenge
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - awscli
+  - pip
+  - pip:
+    - pyOpenSSL
+    - git+https://github.com/will-moore/ome2024-ngff-challenge.git@resave_return_nothing
