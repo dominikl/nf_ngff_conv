@@ -6,4 +6,6 @@ channels:
 dependencies:
   - ome::bioformats2raw
   - awscli
-
+  - pip
+  - pip:
+    - pyOpenSSL
